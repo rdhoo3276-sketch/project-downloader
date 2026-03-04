@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>C.R Downloader</title>
+    <style>
+        body { font-family: sans-serif; display: flex; justify-content: center; align-items: center; height: 100vh; background: #121212; color: white; }
+        .card { background: #1e1e1e; padding: 30px; border-radius: 15px; box-shadow: 0 10px 30px rgba(0,0,0,0.5); text-align: center; }
+        input { padding: 10px; width: 250px; border-radius: 5px; border: none; margin-bottom: 10px; }
+        button { padding: 10px 20px; background: #00ff88; border: none; border-radius: 5px; cursor: pointer; font-weight: bold; }
+        
+        /* Animasi Pop-up */
+        #popup {
+            visibility: hidden; min-width: 250px; background-color: #333; color: #fff; text-align: center;
+            border-radius: 10px; padding: 16px; position: fixed; z-index: 1; bottom: 30px; font-size: 17px;
+            opacity: 0; transition: opacity 0.5s, bottom 0.5s; border: 2px solid #00ff88;
+        }
+        #popup.show { visibility: visible; opacity: 1; bottom: 50px; }
+    </style>
+</head>
+<body>
+
+<div class="card">
+    <h2>C.R DOWNLOADER</h2>
+    <input type="text" id="urlInput" placeholder="Paste link TikTok/YouTube...">
+    <button onclick="startDownload()">Download Now</button>
+</div>
+
+<div id="popup">✅ Berhasil! Cek folder Downloads lo.</div>
+
+<script>
+    function startDownload() {
+        const url = document.getElementById('urlInput').value;
+        if(!url) return alert('Isi linknya dulu!');
+        
+        const popup = document.getElementById('popup');
+        
+        // Panggil route download
+        window.location.href = `/download?url=${encodeURIComponent(url)}`;
+        
+        // Munculkan animasi pop-up (asumsi download mulai)
+        setTimeout(() => {
+            popup.className = "show";
+            setTimeout(() => { popup.className = popup.className.replace("show", ""); }, 4000);
+        }, 1500);
+    }
+</script>
+
+</body>
+</html>
